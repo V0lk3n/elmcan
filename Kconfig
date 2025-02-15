@@ -1,0 +1,5 @@
+config ELM327
+	tristate "Serial ELM327 driver"
+	depends on USB
+	help
+	  Help message of ELM327

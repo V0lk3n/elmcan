@@ -1,3 +1,51 @@
+Note about this branch
+=========================
+
+Reset at last working commit to build for linux 4.9
+
+``b73e235`` <- Last commit without error (rollback)
+``a44b237`` <- First Commit change causing error
+
+Used git cherry-tree <commit> from here to import newer commit with no conflicts
+
+List of not imported commit because of conflicts :
+
+``9afbe26 
+598aacb 
+7cb931f 
+89630db 
+7f51e65 
+09f98cc 
+9a42269 
+40ac32a 
+5fb4737 
+a75c082 
+2713b29``
+
+Last imported commit is ``76e0c2e``, doesnt checked further to match the date of this issue :
+- https://github.com/norly/elmcan/issues/1
+- Nov 5, 2020 : "It worked fine! thanks" (for can-utils usage)
+
+Installation for NetHunter
+===========================
+
+Go inside your kernel source folder and add the repo branch as submodule
+
+``git submodule add -b linux-pre-4.11 https://github.com/V0lk3n/elmcan drivers/net/can/elmcan``
+
+Edit "drivers/net/can/Makefile" and add the following line :
+
+``obj-y                           += elmcan/``
+
+Edit "drivers/net/can/Kconfig" and add the following line :
+
+``source "drivers/net/can/elmcan/Kconfig"``
+
+At building process, enable ELM327 as module "M" under "Networking support > CAN bus subsystem support >  CAN Device Drivers ---> Serial ELM327 driver"
+
+Then save and build :)
+
+
 Linux SocketCAN driver for ELM327
 ==================================
 
